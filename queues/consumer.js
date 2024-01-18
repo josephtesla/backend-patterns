@@ -1,10 +1,10 @@
 const amqplib = require('amqplib');
 const QUEUE_NAME = 'jobs-queue';
-const message = process.argv[2];
+require("dotenv").config();
 
 const connect = async () => {
   try {
-    const connection = await amqplib.connect('amqps://qqxheoig:w9T0CbOjbPFpt1xu0C1B9vr6lK4JvyGP@beaver.rmq.cloudamqp.com/qqxheoig');
+    const connection = await amqplib.connect(process.env.AMQP_URI);
     const channel = await connection.createChannel();
     await channel.assertQueue(QUEUE_NAME);
     
